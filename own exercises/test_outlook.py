@@ -5,11 +5,6 @@ import time
 import pytz
 import dateutil.parser 
 
-#def fix_timezone(dt):
-#   local_tz = dt.astimezone().tzinfo # is there a cleaner way to get the local tz?
-#    shifted = dt.replace(tzinfo=local_tz)
-#    return shifted.astimezone(pytz.utc)
-
 def getCalendarEntries():
     Outlook      = win32com.client.Dispatch("Outlook.Application")
     appointments = Outlook.GetNamespace("MAPI").GetDefaultFolder(9).Items
@@ -20,7 +15,6 @@ def getCalendarEntries():
     appointments = appointments.Restrict("[Start] >= '" +today+"' AND [Start] < '"+tomorrow+"'");
     events={'Start':[],'Subject':[]}
     for a in appointments: 
-        #events['Start'  ].append( fix_timezone( (datetime.datetime.fromtimestamp( timestamp=a.Start.timestamp() ) ) ) );
         events['Start'  ].append(a.Start  );
         events['Subject'].append(a.Subject)
     return events
