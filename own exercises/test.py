@@ -1,17 +1,6 @@
-from win10toast import ToastNotifier
-import time;
-toaster = ToastNotifier()
-
-def func():
-    print("oi");
-
-aa = toaster.show_toast("Example two",
-                   "This notification is in it's own thread!",
-                   icon_path=None,
-                   duration=10,
-                   threaded=True);
-
-
-while toaster.notification_active(): 
-    print("oi"); 
-    time.sleep(1) 
+from infi.systray import SysTrayIcon
+def say_hello(systray):
+    print("Hello, World!")
+menu_options = (("Say Hellopy", None, say_hello),)
+systray = SysTrayIcon("icon.ico", "Example tray icon", menu_options)
+systray.start()
